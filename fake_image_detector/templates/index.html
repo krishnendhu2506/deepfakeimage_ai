@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Authenticity Detector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="app-body">
+    <div class="page-shell">
+        <nav class="nav-bar">
+            <div class="brand-block">
+                <span class="brand-kicker">Deep Learning</span>
+                <h1>Authenticity Vision</h1>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('upload') }}">Upload</a>
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            </div>
+        </nav>
+
+        <section class="hero-grid">
+            <div class="hero-copy reveal-up">
+                <p class="eyebrow">AI IMAGE AUTHENTICITY DETECTOR</p>
+                <h2>Detect whether an image is real photography or AI generated.</h2>
+                <p class="hero-text">
+                    Upload an image, run the CNN classifier, inspect Grad-CAM attention maps,
+                    and review confidence, explanation, and prediction analytics in one interface.
+                </p>
+                <div class="hero-actions">
+                    <a class="primary-button" href="{{ url_for('upload') }}">Start Analysis</a>
+                    <a class="secondary-button" href="{{ url_for('dashboard') }}">Open Dashboard</a>
+                </div>
+            </div>
+
+            <div class="hero-panel reveal-scale">
+                <div class="stat-card">
+                    <span>Total Images Tested</span>
+                    <strong>{{ dashboard.total_predictions }}</strong>
+                </div>
+                <div class="stat-card">
+                    <span>Real Predictions</span>
+                    <strong>{{ dashboard.real_count }}</strong>
+                </div>
+                <div class="stat-card">
+                    <span>AI Predictions</span>
+                    <strong>{{ dashboard.fake_count }}</strong>
+                </div>
+                <div class="insight-card">
+                    <p>Validation Accuracy</p>
+                    <h3>
+                        {% if dashboard.training_metrics.accuracy %}
+                            {{ dashboard.training_metrics.accuracy }}%
+                        {% else %}
+                            Not Trained
+                        {% endif %}
+                    </h3>
+                    <small>{{ dashboard.training_metrics.notes or dashboard.training_metrics.dataset_note or 'Training metrics will appear here after model training.' }}</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-grid">
+            <article class="feature-card reveal-up">
+                <h3>Prediction Output</h3>
+                <p>Binary classification into Real Image or AI Generated Image with confidence score and probability graph.</p>
+            </article>
+            <article class="feature-card reveal-up">
+                <h3>Visual Interpretation</h3>
+                <p>Grad-CAM heatmaps show which regions contributed most to the detector’s decision.</p>
+            </article>
+            <article class="feature-card reveal-up">
+                <h3>Model Validation</h3>
+                <p>Training metrics, confusion matrix, and loss curves help verify accuracy on the validation split.</p>
+            </article>
+        </section>
+
+        <section class="dashboard-preview reveal-up">
+            <div class="section-header">
+                <p class="eyebrow">LIVE ANALYTICS</p>
+                <h3>Prediction distribution</h3>
+            </div>
+            <div class="chart-panel">
+                <canvas id="landingDistributionChart"></canvas>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        window.dashboardData = {{ dashboard | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

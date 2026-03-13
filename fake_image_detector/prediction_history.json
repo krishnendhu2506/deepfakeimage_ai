@@ -1,0 +1,107 @@
+[
+  {
+    "id": "ebd0d8626e994c819e1ae89cbf15a02e",
+    "filename": "ebd0d8626e994c819e1ae89cbf15a02e.jpg",
+    "label": "Real Image",
+    "confidence": 85.19,
+    "explanation": "The image contains natural lighting, realistic texture transitions, and spatial patterns consistent with real photography.",
+    "probabilities": {
+      "Real Image": 85.19,
+      "AI Generated Image": 14.81
+    },
+    "original_image": "generated/ebd0d8626e994c819e1ae89cbf15a02e_original.jpg",
+    "heatmap_image": "generated/ebd0d8626e994c819e1ae89cbf15a02e_heatmap.jpg",
+    "overlay_image": "generated/ebd0d8626e994c819e1ae89cbf15a02e_overlay.jpg",
+    "created_at": "2026-03-12 11:50:50"
+  },
+  {
+    "id": "638d11f60b1c4bc09d997c622a022ba4",
+    "filename": "638d11f60b1c4bc09d997c622a022ba4.jpg",
+    "label": "AI Generated Image",
+    "confidence": 99.73,
+    "explanation": "Detected visual artifacts, repetitive textures, or synthetic patterns commonly associated with AI generated imagery.",
+    "probabilities": {
+      "Real Image": 0.27,
+      "AI Generated Image": 99.73
+    },
+    "original_image": "generated/638d11f60b1c4bc09d997c622a022ba4_original.jpg",
+    "heatmap_image": "generated/638d11f60b1c4bc09d997c622a022ba4_heatmap.jpg",
+    "overlay_image": "generated/638d11f60b1c4bc09d997c622a022ba4_overlay.jpg",
+    "created_at": "2026-03-12 11:49:41"
+  },
+  {
+    "id": "879f098f8e754587af1ddcfc1972747b",
+    "filename": "879f098f8e754587af1ddcfc1972747b.jpg",
+    "label": "AI Generated Image",
+    "confidence": 99.8,
+    "explanation": "Detected visual artifacts, repetitive textures, or synthetic patterns commonly associated with AI generated imagery.",
+    "probabilities": {
+      "Real Image": 0.2,
+      "AI Generated Image": 99.8
+    },
+    "original_image": "generated/879f098f8e754587af1ddcfc1972747b_original.jpg",
+    "heatmap_image": "generated/879f098f8e754587af1ddcfc1972747b_heatmap.jpg",
+    "overlay_image": "generated/879f098f8e754587af1ddcfc1972747b_overlay.jpg",
+    "created_at": "2026-03-12 00:29:01"
+  },
+  {
+    "id": "4dcfd05d3f6c482f9b52f388ecb91ae6",
+    "filename": "4dcfd05d3f6c482f9b52f388ecb91ae6.jpg",
+    "label": "Real Image",
+    "confidence": 67.39,
+    "explanation": "The detector found more natural photographic structure than synthetic artifacts, but the decision is moderately confident.",
+    "probabilities": {
+      "Real Image": 67.39,
+      "AI Generated Image": 32.61
+    },
+    "original_image": "generated/4dcfd05d3f6c482f9b52f388ecb91ae6_original.jpg",
+    "heatmap_image": "generated/4dcfd05d3f6c482f9b52f388ecb91ae6_heatmap.jpg",
+    "overlay_image": "generated/4dcfd05d3f6c482f9b52f388ecb91ae6_overlay.jpg",
+    "created_at": "2026-03-12 00:27:51"
+  },
+  {
+    "id": "5a02d60ab3f445d4a0fde0300a0ba154",
+    "filename": "5a02d60ab3f445d4a0fde0300a0ba154.jpg",
+    "label": "AI Generated Image",
+    "confidence": 63.64,
+    "explanation": "The image shows several cues that lean toward AI synthesis, including texture smoothness and localized inconsistencies.",
+    "probabilities": {
+      "Real Image": 36.36,
+      "AI Generated Image": 63.64
+    },
+    "original_image": "generated/5a02d60ab3f445d4a0fde0300a0ba154_original.jpg",
+    "heatmap_image": "generated/5a02d60ab3f445d4a0fde0300a0ba154_heatmap.jpg",
+    "overlay_image": "generated/5a02d60ab3f445d4a0fde0300a0ba154_overlay.jpg",
+    "created_at": "2026-03-12 00:26:37"
+  },
+  {
+    "id": "54040f2fe5694657b5df557c8cbba9cb",
+    "filename": "54040f2fe5694657b5df557c8cbba9cb.jpg",
+    "label": "Real Image",
+    "confidence": 99.97,
+    "explanation": "The image contains natural lighting, realistic texture transitions, and spatial patterns consistent with real photography.",
+    "probabilities": {
+      "Real Image": 99.97,
+      "AI Generated Image": 0.03
+    },
+    "original_image": "generated/54040f2fe5694657b5df557c8cbba9cb_original.jpg",
+    "heatmap_image": "generated/54040f2fe5694657b5df557c8cbba9cb_heatmap.jpg",
+    "overlay_image": "generated/54040f2fe5694657b5df557c8cbba9cb_overlay.jpg",
+    "created_at": "2026-03-12 00:25:59"
+  },
+  {
+    "id": "d5c926c202b74aa7b5efccc98f2b317d",
+    "filename": "d5c926c202b74aa7b5efccc98f2b317d.jpg",
+    "label": "Real Image",
+    "confidence": 70.12,
+    "explanation": "The detector found more natural photographic structure than synthetic artifacts, but the decision is moderately confident.",
+    "probabilities": {
+      "Real Image": 70.12,
+      "AI Generated Image": 29.88
+    },
+    "original_image": "generated/d5c926c202b74aa7b5efccc98f2b317d_original.jpg",
+    "heatmap_image": "generated/d5c926c202b74aa7b5efccc98f2b317d_heatmap.jpg",
+    "overlay_image": "generated/d5c926c202b74aa7b5efccc98f2b317d_overlay.jpg",
+    "created_at": "2026-03-12 00:24:57"
+  }
+]

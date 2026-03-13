@@ -1,0 +1,15 @@
+{
+  "id": "638d11f60b1c4bc09d997c622a022ba4",
+  "filename": "638d11f60b1c4bc09d997c622a022ba4.jpg",
+  "label": "AI Generated Image",
+  "confidence": 99.73,
+  "explanation": "Detected visual artifacts, repetitive textures, or synthetic patterns commonly associated with AI generated imagery.",
+  "probabilities": {
+    "Real Image": 0.27,
+    "AI Generated Image": 99.73
+  },
+  "original_image": "generated/638d11f60b1c4bc09d997c622a022ba4_original.jpg",
+  "heatmap_image": "generated/638d11f60b1c4bc09d997c622a022ba4_heatmap.jpg",
+  "overlay_image": "generated/638d11f60b1c4bc09d997c622a022ba4_overlay.jpg",
+  "created_at": "2026-03-12 11:49:41"
+}

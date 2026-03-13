@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="app-body">
+    <div class="page-shell">
+        <nav class="nav-bar">
+            <div class="brand-block">
+                <span class="brand-kicker">Analysis Result</span>
+                <h1>{{ result.label }}</h1>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('upload') }}">New Upload</a>
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            </div>
+        </nav>
+
+        <section class="result-summary reveal-up">
+            <div class="summary-card highlight">
+                <span>Prediction Label</span>
+                <strong>{{ result.label }}</strong>
+            </div>
+            <div class="summary-card">
+                <span>Confidence Score</span>
+                <strong>{{ result.confidence }}%</strong>
+            </div>
+            <div class="summary-card">
+                <span>Generated At</span>
+                <strong>{{ result.created_at }}</strong>
+            </div>
+        </section>
+
+        <section class="explanation-panel reveal-up">
+            <p class="eyebrow">MODEL INTERPRETATION</p>
+            <h2>Why the system made this decision</h2>
+            <p>{{ result.explanation }}</p>
+        </section>
+
+        <section class="result-grid">
+            <div class="chart-panel reveal-scale">
+                <div class="section-header">
+                    <p class="eyebrow">PROBABILITY DISTRIBUTION</p>
+                    <h3>Class confidence</h3>
+                </div>
+                <canvas id="resultProbabilityChart"></canvas>
+            </div>
+
+            <div class="visual-grid reveal-up">
+                <div class="visual-card">
+                    <h3>Original Image</h3>
+                    <img src="{{ url_for('static', filename=result.original_image) }}" alt="Original image">
+                </div>
+                <div class="visual-card">
+                    <h3>Grad-CAM Heatmap</h3>
+                    <img src="{{ url_for('static', filename=result.heatmap_image) }}" alt="Grad-CAM heatmap">
+                </div>
+                <div class="visual-card">
+                    <h3>Overlay Comparison</h3>
+                    <img src="{{ url_for('static', filename=result.overlay_image) }}" alt="Overlay image">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        window.resultData = {{ result | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

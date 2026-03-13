@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="app-body">
+    <div class="page-shell">
+        <nav class="nav-bar">
+            <div class="brand-block">
+                <span class="brand-kicker">Upload Module</span>
+                <h1>Analyze Image</h1>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert-stack">
+                    {% for category, message in messages %}
+                        <div class="alert-box {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <section class="upload-layout">
+            <div class="upload-card reveal-up">
+                <p class="eyebrow">SUPPORTED TYPES</p>
+                <h2>JPG, JPEG, PNG</h2>
+                <p class="hero-text">The uploaded image is resized to 128x128 and normalized before prediction.</p>
+
+                {% if model_error %}
+                    <div class="alert-box error">{{ model_error }}</div>
+                {% elif not model_available %}
+                    <div class="alert-box error">Model file missing. Train the CNN first using <code>python model/train_model.py</code>.</div>
+                {% endif %}
+
+                <form id="uploadForm" class="upload-form" action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+                    <label for="image" class="upload-dropzone">
+                        <input id="image" name="image" type="file" accept=".jpg,.jpeg,.png" required>
+                        <span>Select or drag an image here</span>
+                        <small>Preview appears instantly before prediction runs.</small>
+                    </label>
+                    <button class="primary-button" type="submit" {% if not model_available %}disabled{% endif %}>Run Prediction</button>
+                </form>
+            </div>
+
+            <div class="preview-card reveal-scale">
+                <div class="preview-header">
+                    <p class="eyebrow">IMAGE PREVIEW</p>
+                    <h3>Ready for analysis</h3>
+                </div>
+                <img id="imagePreview" class="preview-image hidden" alt="Uploaded preview">
+                <div id="previewPlaceholder" class="preview-placeholder">
+                    <p>No image selected yet.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-card">
+            <div class="scanner-ring"></div>
+            <h3>Running CNN Prediction</h3>
+            <p>Preparing image, generating confidence scores, and computing Grad-CAM visualization.</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

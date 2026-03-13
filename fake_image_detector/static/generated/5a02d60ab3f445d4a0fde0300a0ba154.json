@@ -1,0 +1,15 @@
+{
+  "id": "5a02d60ab3f445d4a0fde0300a0ba154",
+  "filename": "5a02d60ab3f445d4a0fde0300a0ba154.jpg",
+  "label": "AI Generated Image",
+  "confidence": 63.64,
+  "explanation": "The image shows several cues that lean toward AI synthesis, including texture smoothness and localized inconsistencies.",
+  "probabilities": {
+    "Real Image": 36.36,
+    "AI Generated Image": 63.64
+  },
+  "original_image": "generated/5a02d60ab3f445d4a0fde0300a0ba154_original.jpg",
+  "heatmap_image": "generated/5a02d60ab3f445d4a0fde0300a0ba154_heatmap.jpg",
+  "overlay_image": "generated/5a02d60ab3f445d4a0fde0300a0ba154_overlay.jpg",
+  "created_at": "2026-03-12 00:26:37"
+}

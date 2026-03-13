@@ -1,0 +1,70 @@
+{
+  "accuracy": 95.82,
+  "loss": 0.1147,
+  "confusion_matrix": [
+    [
+      2040,
+      125
+    ],
+    [
+      325,
+      8263
+    ]
+  ],
+  "history": {
+    "train_accuracy": [
+      0.8275,
+      0.8743,
+      0.9102,
+      0.9286,
+      0.9321,
+      0.9389,
+      0.9442,
+      0.9459,
+      0.9473,
+      0.9517
+    ],
+    "val_accuracy": [
+      0.8635,
+      0.9152,
+      0.9228,
+      0.9428,
+      0.9439,
+      0.9513,
+      0.9537,
+      0.9507,
+      0.9582,
+      0.9548
+    ],
+    "train_loss": [
+      0.3878,
+      0.2894,
+      0.2178,
+      0.1823,
+      0.1674,
+      0.1545,
+      0.1417,
+      0.1356,
+      0.1325,
+      0.1269
+    ],
+    "val_loss": [
+      0.3152,
+      0.2102,
+      0.1858,
+      0.1445,
+      0.1409,
+      0.1251,
+      0.1196,
+      0.1272,
+      0.1147,
+      0.1175
+    ]
+  },
+  "dataset_note": "Discovered 10826 real images and 42935 fake images from 2 real folders and 2 fake folders.",
+  "training_samples": 43008,
+  "validation_samples": 10753,
+  "loss_graph": "generated/loss_accuracy_graph.png",
+  "confusion_matrix_image": "generated/confusion_matrix.png",
+  "device": "cpu"
+}

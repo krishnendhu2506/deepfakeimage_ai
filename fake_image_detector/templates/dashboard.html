@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="app-body">
+    <div class="page-shell">
+        <nav class="nav-bar">
+            <div class="brand-block">
+                <span class="brand-kicker">Analytics</span>
+                <h1>Prediction Dashboard</h1>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('upload') }}">Upload</a>
+            </div>
+        </nav>
+
+        <section class="result-summary reveal-up">
+            <div class="summary-card highlight">
+                <span>Images Tested</span>
+                <strong>{{ dashboard.total_predictions }}</strong>
+            </div>
+            <div class="summary-card">
+                <span>Real Predictions</span>
+                <strong>{{ dashboard.real_count }}</strong>
+            </div>
+            <div class="summary-card">
+                <span>AI Predictions</span>
+                <strong>{{ dashboard.fake_count }}</strong>
+            </div>
+        </section>
+
+        <section class="dashboard-grid">
+            <div class="chart-panel reveal-scale">
+                <div class="section-header">
+                    <p class="eyebrow">REAL VS FAKE</p>
+                    <h3>Prediction distribution</h3>
+                </div>
+                <canvas id="dashboardDistributionChart"></canvas>
+            </div>
+
+            <div class="metrics-card reveal-up">
+                <p class="eyebrow">VALIDATION METRICS</p>
+                <h3>Model performance</h3>
+                <p>Accuracy: <strong>{{ dashboard.training_metrics.accuracy if dashboard.training_metrics.accuracy else 'Not available' }}</strong>{% if dashboard.training_metrics.accuracy %}%{% endif %}</p>
+                <p>Loss: <strong>{{ dashboard.training_metrics.loss if dashboard.training_metrics.loss else 'Not available' }}</strong></p>
+                <p class="metrics-note">{{ dashboard.training_metrics.notes or dashboard.training_metrics.dataset_note or 'Training metrics will appear after running the training script.' }}</p>
+            </div>
+        </section>
+
+        <section class="dashboard-grid">
+            <div class="image-panel reveal-up">
+                <div class="section-header">
+                    <p class="eyebrow">CONFUSION MATRIX</p>
+                    <h3>Validation outcome</h3>
+                </div>
+                {% if dashboard.training_metrics.confusion_matrix_image %}
+                    <img src="{{ url_for('static', filename=dashboard.training_metrics.confusion_matrix_image) }}" alt="Confusion matrix">
+                {% else %}
+                    <div class="empty-state">Run training to generate the confusion matrix.</div>
+                {% endif %}
+            </div>
+
+            <div class="image-panel reveal-scale">
+                <div class="section-header">
+                    <p class="eyebrow">LOSS GRAPH</p>
+                    <h3>Training history</h3>
+                </div>
+                {% if dashboard.training_metrics.loss_graph %}
+                    <img src="{{ url_for('static', filename=dashboard.training_metrics.loss_graph) }}" alt="Loss graph">
+                {% else %}
+                    <div class="empty-state">Run training to generate the loss graph.</div>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="history-panel reveal-up">
+            <div class="section-header">
+                <p class="eyebrow">PREDICTION HISTORY</p>
+                <h3>Recent analyses</h3>
+            </div>
+            <div class="history-table">
+                <div class="history-row history-head">
+                    <span>Time</span>
+                    <span>Label</span>
+                    <span>Confidence</span>
+                    <span>Image</span>
+                </div>
+                {% for item in dashboard.history %}
+                    <div class="history-row">
+                        <span>{{ item.created_at }}</span>
+                        <span>{{ item.label }}</span>
+                        <span>{{ item.confidence }}%</span>
+                        <span>{{ item.filename }}</span>
+                    </div>
+                {% else %}
+                    <div class="empty-state">No predictions recorded yet.</div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    <script>
+        window.dashboardData = {{ dashboard | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "id": "4dcfd05d3f6c482f9b52f388ecb91ae6",
+  "filename": "4dcfd05d3f6c482f9b52f388ecb91ae6.jpg",
+  "label": "Real Image",
+  "confidence": 67.39,
+  "explanation": "The detector found more natural photographic structure than synthetic artifacts, but the decision is moderately confident.",
+  "probabilities": {
+    "Real Image": 67.39,
+    "AI Generated Image": 32.61
+  },
+  "original_image": "generated/4dcfd05d3f6c482f9b52f388ecb91ae6_original.jpg",
+  "heatmap_image": "generated/4dcfd05d3f6c482f9b52f388ecb91ae6_heatmap.jpg",
+  "overlay_image": "generated/4dcfd05d3f6c482f9b52f388ecb91ae6_overlay.jpg",
+  "created_at": "2026-03-12 00:27:51"
+}

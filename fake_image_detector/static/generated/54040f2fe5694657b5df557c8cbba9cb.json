@@ -1,0 +1,15 @@
+{
+  "id": "54040f2fe5694657b5df557c8cbba9cb",
+  "filename": "54040f2fe5694657b5df557c8cbba9cb.jpg",
+  "label": "Real Image",
+  "confidence": 99.97,
+  "explanation": "The image contains natural lighting, realistic texture transitions, and spatial patterns consistent with real photography.",
+  "probabilities": {
+    "Real Image": 99.97,
+    "AI Generated Image": 0.03
+  },
+  "original_image": "generated/54040f2fe5694657b5df557c8cbba9cb_original.jpg",
+  "heatmap_image": "generated/54040f2fe5694657b5df557c8cbba9cb_heatmap.jpg",
+  "overlay_image": "generated/54040f2fe5694657b5df557c8cbba9cb_overlay.jpg",
+  "created_at": "2026-03-12 00:25:59"
+}
