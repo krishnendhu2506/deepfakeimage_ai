@@ -4,6 +4,6 @@
     "builder": "RAILPACK"
   },
   "deploy": {
-    "startCommand": "cd fake_image_detector && gunicorn --bind 0.0.0.0:$PORT app:app"
+    "startCommand": "gunicorn --bind 0.0.0.0:$PORT main:flask_app"
   }
 }
