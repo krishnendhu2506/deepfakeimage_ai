@@ -1,4 +1,5 @@
 ﻿import json
+import os
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -182,4 +183,5 @@ def dashboard():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.getenv("PORT", "5000"))
+    app.run(host="0.0.0.0", port=port, debug=False)

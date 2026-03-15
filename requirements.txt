@@ -1,0 +1,2 @@
+-r fake_image_detector/requirements.txt
+gunicorn
