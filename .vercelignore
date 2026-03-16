@@ -1,6 +1,0 @@
-.git
-Dataset
-fake_image_detector/static/uploads
-fake_image_detector/static/generated/*.jpg
-fake_image_detector/static/generated/*.json
-!fake_image_detector/static/generated/training_metrics.json

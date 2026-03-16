@@ -1,12 +1,8 @@
 ﻿torch
 torchvision
 flask
-<<<<<<< HEAD
 gunicorn
-opencv-python
-=======
 opencv-python-headless
->>>>>>> 5cc97653d18015ff80dfb1f637839866e4bbac15
 numpy
 pandas
 matplotlib

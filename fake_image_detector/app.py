@@ -1,9 +1,6 @@
 ﻿import json
 import os
-<<<<<<< HEAD
 import tempfile
-=======
->>>>>>> 5cc97653d18015ff80dfb1f637839866e4bbac15
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -125,14 +122,14 @@ def index():
 def upload():
     get_model()
     model_available = MODEL_PATH.exists() and MODEL_ERROR is None
-    return render_template("upload.html", model_available=model_available, model_error=model_error_text())
+    return render_template("upload.html", model_available=model_available, model_error=MODEL_ERROR)
 
 
 @app.route("/predict", methods=["POST"])
 def predict():
     detector = get_model()
     if detector is None:
-        flash(model_error_text() or "Model could not be loaded.", "error")
+        flash(MODEL_ERROR or "Model could not be loaded.", "error")
         return redirect(url_for("upload"))
 
     if "image" not in request.files:
@@ -209,14 +206,5 @@ def dashboard():
     return render_template("dashboard.html", dashboard=build_dashboard_data())
 
 
-def model_error_text():
-    return MODEL_ERROR
-
-
 if __name__ == "__main__":
-<<<<<<< HEAD
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)), debug=os.getenv("FLASK_DEBUG", "false").lower() == "true")
-=======
-    port = int(os.getenv("PORT", "5000"))
-    app.run(host="0.0.0.0", port=port, debug=False)
->>>>>>> 5cc97653d18015ff80dfb1f637839866e4bbac15

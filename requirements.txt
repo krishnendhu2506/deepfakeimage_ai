@@ -2,7 +2,7 @@
 torchvision
 flask
 gunicorn
-opencv-python
+opencv-python-headless
 numpy
 pandas
 matplotlib
