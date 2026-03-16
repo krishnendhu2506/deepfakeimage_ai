@@ -1,9 +1,1 @@
-torch
-torchvision
-flask
-opencv-python
-numpy
-pandas
-matplotlib
-scikit-learn
-pillow
+﻿-r fake_image_detector/requirements.txt

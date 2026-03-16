@@ -1,6 +1,9 @@
 ﻿import json
 import os
+<<<<<<< HEAD
 import tempfile
+=======
+>>>>>>> 5cc97653d18015ff80dfb1f637839866e4bbac15
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -211,4 +214,9 @@ def model_error_text():
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)), debug=os.getenv("FLASK_DEBUG", "false").lower() == "true")
+=======
+    port = int(os.getenv("PORT", "5000"))
+    app.run(host="0.0.0.0", port=port, debug=False)
+>>>>>>> 5cc97653d18015ff80dfb1f637839866e4bbac15
