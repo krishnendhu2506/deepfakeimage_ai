@@ -1,7 +1,6 @@
-﻿torch
+torch
 torchvision
 flask
-gunicorn
 opencv-python
 numpy
 pandas

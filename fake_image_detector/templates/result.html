@@ -55,15 +55,15 @@
             <div class="visual-grid reveal-up">
                 <div class="visual-card">
                     <h3>Original Image</h3>
-                    <img src="{{ url_for('static', filename=result.original_image) }}" alt="Original image">
+                    <img src="{{ asset_url(result.original_image) }}" alt="Original image">
                 </div>
                 <div class="visual-card">
                     <h3>Grad-CAM Heatmap</h3>
-                    <img src="{{ url_for('static', filename=result.heatmap_image) }}" alt="Grad-CAM heatmap">
+                    <img src="{{ asset_url(result.heatmap_image) }}" alt="Grad-CAM heatmap">
                 </div>
                 <div class="visual-card">
                     <h3>Overlay Comparison</h3>
-                    <img src="{{ url_for('static', filename=result.overlay_image) }}" alt="Overlay image">
+                    <img src="{{ asset_url(result.overlay_image) }}" alt="Overlay image">
                 </div>
             </div>
         </section>

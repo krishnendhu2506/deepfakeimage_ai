@@ -1,0 +1,17 @@
+﻿{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "builder": "RAILPACK",
+    "buildCommand": "cd fake_image_detector && pip install -r requirements.txt",
+    "watchPatterns": [
+      "fake_image_detector/**"
+    ]
+  },
+  "deploy": {
+    "startCommand": "cd fake_image_detector && gunicorn wsgi:app",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 120,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}

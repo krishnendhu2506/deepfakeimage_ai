@@ -1,21 +1,25 @@
 ﻿import json
+import os
+import tempfile
 import uuid
 from datetime import datetime
 from pathlib import Path
 
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, abort, flash, redirect, render_template, request, send_from_directory, url_for
 
 from utils.image_preprocess import allowed_file, ensure_directories
 
 
 BASE_DIR = Path(__file__).resolve().parent
-UPLOAD_DIR = BASE_DIR / "static" / "uploads"
-GENERATED_DIR = BASE_DIR / "static" / "generated"
-HISTORY_FILE = BASE_DIR / "prediction_history.json"
+STATIC_GENERATED_DIR = BASE_DIR / "static" / "generated"
+RUNTIME_BASE_DIR = Path(os.getenv("FAKE_IMAGE_RUNTIME_DIR", Path(tempfile.gettempdir()) / "fake_image_detector"))
+UPLOAD_DIR = RUNTIME_BASE_DIR / "uploads"
+GENERATED_DIR = RUNTIME_BASE_DIR / "generated"
+HISTORY_FILE = RUNTIME_BASE_DIR / "prediction_history.json"
 MODEL_PATH = BASE_DIR / "model" / "fake_image_detector.pth"
 
 app = Flask(__name__)
-app.secret_key = "fake-image-detector-secret-key"
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "fake-image-detector-secret-key")
 
 ensure_directories([UPLOAD_DIR, GENERATED_DIR])
 
@@ -34,8 +38,17 @@ def read_json_file(file_path: Path, default):
 
 
 def write_json_file(file_path: Path, payload):
+    file_path.parent.mkdir(parents=True, exist_ok=True)
     with file_path.open("w", encoding="utf-8") as file:
         json.dump(payload, file, indent=2)
+
+
+def asset_url(asset_path: str | None):
+    if not asset_path:
+        return ""
+    if asset_path.startswith("generated/") or asset_path.startswith("uploads/"):
+        return url_for("media_file", file_path=asset_path)
+    return url_for("static", filename=asset_path)
 
 
 def get_model():
@@ -68,8 +81,7 @@ def save_history_entry(entry):
 
 
 def get_training_metrics():
-    metrics_file = GENERATED_DIR / "training_metrics.json"
-    metrics = read_json_file(metrics_file, {})
+    metrics = read_json_file(STATIC_GENERATED_DIR / "training_metrics.json", {})
     if not metrics:
         return {
             "accuracy": None,
@@ -95,6 +107,11 @@ def build_dashboard_data():
     }
 
 
+@app.context_processor
+def inject_asset_helpers():
+    return {"asset_url": asset_url}
+
+
 @app.route("/")
 def index():
     dashboard = build_dashboard_data()
@@ -105,14 +122,14 @@ def index():
 def upload():
     get_model()
     model_available = MODEL_PATH.exists() and MODEL_ERROR is None
-    return render_template("upload.html", model_available=model_available, model_error=MODEL_ERROR)
+    return render_template("upload.html", model_available=model_available, model_error=model_error_text())
 
 
 @app.route("/predict", methods=["POST"])
 def predict():
     detector = get_model()
     if detector is None:
-        flash(MODEL_ERROR or "Model could not be loaded.", "error")
+        flash(model_error_text() or "Model could not be loaded.", "error")
         return redirect(url_for("upload"))
 
     if "image" not in request.files:
@@ -161,19 +178,27 @@ def predict():
     }
 
     save_history_entry(result_payload)
-    result_file = GENERATED_DIR / f"{analysis_id}.json"
-    write_json_file(result_file, result_payload)
-    return redirect(url_for("result", analysis_id=analysis_id))
+    write_json_file(GENERATED_DIR / f"{analysis_id}.json", result_payload)
+    return render_template("result.html", result=result_payload)
 
 
 @app.route("/result/<analysis_id>")
 def result(analysis_id):
-    result_file = GENERATED_DIR / f"{analysis_id}.json"
-    result_payload = read_json_file(result_file, None)
+    result_payload = read_json_file(GENERATED_DIR / f"{analysis_id}.json", None)
     if result_payload is None:
         flash("Prediction result not found.", "error")
         return redirect(url_for("upload"))
     return render_template("result.html", result=result_payload)
+
+
+@app.route("/media/<path:file_path>")
+def media_file(file_path):
+    normalized = Path(file_path)
+    if len(normalized.parts) != 2 or normalized.parts[0] not in {"generated", "uploads"}:
+        abort(404)
+
+    directory = GENERATED_DIR if normalized.parts[0] == "generated" else UPLOAD_DIR
+    return send_from_directory(directory, normalized.parts[1])
 
 
 @app.route("/dashboard")
@@ -181,5 +206,9 @@ def dashboard():
     return render_template("dashboard.html", dashboard=build_dashboard_data())
 
 
+def model_error_text():
+    return MODEL_ERROR
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)), debug=os.getenv("FLASK_DEBUG", "false").lower() == "true")

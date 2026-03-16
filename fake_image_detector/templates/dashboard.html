@@ -62,7 +62,7 @@
                     <h3>Validation outcome</h3>
                 </div>
                 {% if dashboard.training_metrics.confusion_matrix_image %}
-                    <img src="{{ url_for('static', filename=dashboard.training_metrics.confusion_matrix_image) }}" alt="Confusion matrix">
+                    <img src="{{ asset_url(dashboard.training_metrics.confusion_matrix_image) }}" alt="Confusion matrix">
                 {% else %}
                     <div class="empty-state">Run training to generate the confusion matrix.</div>
                 {% endif %}
@@ -74,7 +74,7 @@
                     <h3>Training history</h3>
                 </div>
                 {% if dashboard.training_metrics.loss_graph %}
-                    <img src="{{ url_for('static', filename=dashboard.training_metrics.loss_graph) }}" alt="Loss graph">
+                    <img src="{{ asset_url(dashboard.training_metrics.loss_graph) }}" alt="Loss graph">
                 {% else %}
                     <div class="empty-state">Run training to generate the loss graph.</div>
                 {% endif %}

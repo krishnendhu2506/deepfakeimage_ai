@@ -1,0 +1,16 @@
+[project]
+name = "deepfakeimage-ai"
+version = "0.1.0"
+description = "Flask app for AI image authenticity detection."
+requires-python = "==3.12.*"
+dependencies = [
+  "torch",
+  "torchvision",
+  "flask",
+  "opencv-python",
+  "numpy",
+  "pandas",
+  "matplotlib",
+  "scikit-learn",
+  "pillow",
+]
